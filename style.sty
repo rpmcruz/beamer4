@@ -1,0 +1,40 @@
+\ProvidesPackage{style}
+
+\setbeamercolor{frametitle}{fg=gray,bg=white}
+\setbeamertemplate{frametitle}{\color{gray}\bfseries\insertframetitle\par\vskip-6pt\hrulefill\vspace*{-1.7mm}}
+
+\setbeamertemplate{navigation symbols}{}  % sem botoes navegacao
+
+%\setbeamercolor{palette primary}{fg=black,bg=white}  % nada disto esta a fazer algo
+%\setbeamercolor{palette secondary}{fg=black,bg=white}
+%\setbeamercolor{palette tertiary}{fg=black,bg=white}
+%\setbeamercolor{normal text}{fg=black,bg=white}
+
+% subitems same size parents
+\setbeamerfont{itemize/enumerate subbody}{size=\normalsize} %to set the body size
+\setbeamercolor{itemize item}{fg=black}
+\setbeamercolor{itemize subitem}{fg=black}
+\setbeamercolor{enumerate item}{fg=black}
+\setbeamercolor{enumerate subitem}{fg=black}
+\setlength{\leftmargini}{1.3em}  % margem esquerda
+\setlength{\leftmarginii}{0.6em}
+\setlength{\leftmarginiii}{0.6em}
+\setlength\labelsep{0.1em}  % espaço entre simbolo e texto
+
+\usepackage{setspace}     % espaçamento entre linhas
+\linespread{0.9}
+\setlength{\parskip}{0ex}
+\usepackage{multicol}
+
+\usepackage{booktabs}  % toprule e etc
+\setlength{\tabcolsep}{1pt} % espaço entre colunas
+\usepackage{amsmath}   % \text nas equacoes
+\usepackage{mathrsfs}  % \mathscr
+\usepackage{relsize}   % \mathlarger font size
+
+\setbeamercolor{bibliography item}{fg=black}
+\setbeamercolor{bibliography entry author}{fg=black}
+\setbeamercolor{bibliography entry title}{fg=black}
+\setbeamercolor{bibliography entry journal}{fg=darkgray}
+\setbeamercolor{bibliography entry location}{fg=darkgray}
+\setbeamercolor{bibliography entry note}{fg=darkgray}
