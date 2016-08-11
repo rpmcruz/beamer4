@@ -4,4 +4,6 @@ Slides have many advantages over the traditional blackboard or the more modern w
 
 The idea behind this simple script is to generate 4x4 grid beamer presentation where the last three slides are still visible.
 
+Example:
+
 ![Document example](example.png)
