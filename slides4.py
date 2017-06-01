@@ -21,21 +21,22 @@ inside_frame = False
 output.write(input.readline())  # header
 
 output.write(r'''
-\newcommand\Inactive[1]{%
-\colorbox{white}{%
+\usepackage[skins]{tcolorbox}
+\newtcolorbox{Active}{boxsep=0pt, colback=yellow!50, width=0.5\textwidth, height=0.46\textheight, left=1mm, right=1mm, top=1mm, bottom=1mm, boxrule=0pt, frame hidden, bicolor, sharp corners, nobeforeafter}
+\newtcolorbox{TInactive}{boxsep=0pt, colback=white, width=0.5\textwidth, height=0.46\textheight, left=1mm, right=1mm, top=1mm, bottom=1mm, boxrule=0pt, frame hidden, bicolor, sharp corners, nobeforeafter}
+\newenvironment{Inactive}{%
+\begin{TInactive}%
 \setbeamercolor{normal text}{fg=gray}%
 \usebeamercolor[fg]{normal text}%
 \setbeamercolor{structure}{fg=gray}%
 \usebeamercolor[fg]{structure}%
 \setbeamercolor{itemize item}{fg=gray}%
 \setbeamercolor{itemize subitem}{fg=gray}%
-\begin{minipage}[b][.438\textheight][t]{.4825\textwidth}#1\end{minipage}%
-}}
-\newcommand\Active[1]{%
-\colorbox{yellow!50}{%
-\begin{minipage}[b][.438\textheight][t]{.4825\textwidth}#1\end{minipage}%
-}}
+}{%
+\end{TInactive}}
 ''')
+
+# inves de top, bottom, left, right... podes meter fbox, small
 
 for line in input:
     if line.startswith(r'\begin{frame}'):
@@ -45,6 +46,7 @@ for line in input:
             special_header = line
         else:
             special_frames = []
+            output.write(line)
     elif inside_frame:
         if line.startswith(r'\end{frame}'):
             output.write(special_header)
@@ -56,16 +58,22 @@ for line in input:
             if len(frames) == 3:
                 frames.insert(2, (2, ''))
             for i, frame in frames:
-                if frame == special_frames[-1]:
-                    output.write(r'\Active{')
+                is_active = frame == special_frames[-1]
+                if is_active:
+                    output.write(r'\begin{Active}')
                 else:
-                    output.write(r'\Inactive{')
+                    output.write(r'\begin{Inactive}')
                 output.write(frame)
-                output.write(r'}')
-                if i % 2 == 0:
-                    output.write(r'\hfill')
+                if is_active:
+                    output.write(r'\end{Active}')
                 else:
-                    output.write(r'\\')
+                    output.write(r'\end{Inactive}')
+                if i+1 < len(frames):
+                    if i % 2 == 0:
+                        output.write(r'\hfill')
+                    else:
+                        output.write(r'\\')
+            output.write('\n')
             output.write(r'\end{frame}')
             output.write('\n')
             inside_frame = False
